@@ -23,7 +23,6 @@ Getting started
 
 * deploy (html)
   - src/index.html -> deploy/index.html
-  - 
 
 * img
   - They have to be in ./deploy/img/

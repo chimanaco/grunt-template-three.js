@@ -1,7 +1,7 @@
 grunt-template-three.js
 =======================
 
-template sets for a three.js sketch to build with grunt 
+grunt template for a three.js sketch with jade 
 
 Getting started
 -----
@@ -9,21 +9,23 @@ Getting started
 * install node_modules<br>
   - $npm install
 
+Usage
+-----
 * start watch & connect<br>
-  - $grunt start
+  - $grunt go
 
-* live reload<br>
-  - ./deploy/ -> http://localhost:9000/
+Directories
+-----
+
+* local address<br>
+  - /dist/* -> http://localhost:9000/*
 
 * deploy (Javascript)
-  - ./src/foo.js + src/bar.js -> deploy/js/<%= pkg.name %>.js & deploy/js/<%= pkg.name %>.min.js<br>
+  - src/*/foo.js -> dist/*/js/foo.js<br>
 
 * deploy (CSS / SASS)
-  - ./scss/foo.scss -> ./deploy/foo.css<br>
+  - sass/foo.scss -> dist/css/foo.css<br>
 
 * deploy (html)
-  - src/index.html -> deploy/index.html
-
-* img
-  - They have to be in ./deploy/img/
+  - src/*/index.html -> dist/*/index.html
 

@@ -18,14 +18,14 @@ Directories
 -----
 
 * local address<br>
-  - /dist/* -> http://localhost:9000/*
+  - /dist/boo/ -> http://localhost:9000/boo/
 
 * deploy (Javascript)
-  - src/*/foo.js -> dist/*/js/foo.js<br>
+  - src/boo/foo.js -> dist/boo/js/foo.js<br>
 
 * deploy (CSS / SASS)
   - sass/foo.scss -> dist/css/foo.css<br>
 
 * deploy (html)
-  - src/*/index.html -> dist/*/index.html
+  - src/boo/index.html -> dist/boo/index.html
 

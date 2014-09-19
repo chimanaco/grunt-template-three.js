@@ -1,0 +1,11 @@
+mixin metaFB(page, url, img)
+  meta(property='og:title', content=page + title)
+  meta(property='og:url', content=home + url)
+  meta(property='og:image', content=home + "img/" + img)
+  meta(property='og:site_name', content=page + title)
+
+ mixin metaFBTop(page, url, img)
+  meta(property='og:title', content=page)
+  meta(property='og:url', content=home)
+  meta(property='og:image', content=home + "img/" + img)
+  meta(property='og:site_name', content=page)

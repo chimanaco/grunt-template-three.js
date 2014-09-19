@@ -1,0 +1,55 @@
+doctype html
+html.no-js(xmlns:og='http://ogp.me/ns#', xmlns:fb='https://www.facebook.com/2008/fbml')
+
+- var bodyID = '';
+- var page = '';
+- var url = '';
+- var img = '';
+- var referURL = '';
+- var referTitle = '';
+- var preURL = 'http://www.chimana.co/';
+- var libJsURL = preURL + 'lab/js/lib/';
+- var jsURL = preURL + 'lab/js/';
+- var cssURL = preURL + 'lab/css/';
+
+block vars
+
+head
+    meta(charset='UTF-8')
+
+    title= page + title
+
+    block meta
+        meta(name='viewport', content='width=device-width')
+        meta(name='author', content=author.name)
+        meta(name='description', content=description)
+        meta(name='keywords', content=keywords)
+        meta(name='robots', content='all')
+    block metaFB
+        meta(property='og:type', content='website')
+        meta(property='og:description', content=description)
+        meta(property='fb:admins', content='1668055849')
+        mixin metaFB(page, url, img)
+      
+    block style
+        link(rel='stylesheet', href='#{cssURL}threejs.css')
+
+    block shader
+
+body(id='#{bodyID}')
+    #threeJs
+    #fb-root
+            
+    script(src="#{libJsURL}dat.gui.min.js")
+    script(src="#{libJsURL}three.min.js")
+    script(src="#{libJsURL}Detector.js")
+    script(src="#{libJsURL}OrbitControls.js")
+    script(src="#{libJsURL}Stats.js")
+    script(src="#{libJsURL}THREEx.KeyboardState.js")
+    script(src="#{libJsURL}THREEx.FullScreen.js")
+
+    block body
+    script(src="#{jsURL}socials.js")
+    script(src="#{jsURL}dat.gui-manager.min.js")
+    script(src="#{jsURL}analytics.js")
+

@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* js stats z-index: 100 */
+
+body {
+    font-size: 100%;
+    margin:0;
+    padding: 0;
+    background-color:#fff;
+    /*font-family:'Georgia','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;*/
+    font-family:'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+
+img { border: none }
+
+#threeJs {
+    position:absolute;
+    left:0;
+    top:0
+}
+
+/* info */
+
+#info {
+    // display: none;
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    z-index: 200;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+
+    ul {
+        margin: 0;
+        padding: 10px;
+        display: block;
+        list-style: none;
+    }
+
+    li {
+        display: block;
+        padding: 0 0 5px;
+        line-height: 1.5;
+        font-size: 0.75em;
+    }
+
+    a {
+       color: #ff0099;
+
+       &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+/* sns buttons */
+
+iframe.twitter-share-button {
+    width: 90px!important;
+}
+
+#___plusone_0 {
+    width: 70px!important;
+}
+
+/* background Black */
+
+body#bgBlack {
+    background-color: #000;
+}
+
+#bgBlack #info {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+}

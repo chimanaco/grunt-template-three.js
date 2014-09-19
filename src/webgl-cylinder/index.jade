@@ -1,0 +1,17 @@
+extends ../_layout
+include ../_mixin_reference.jade
+include ../_mixin_sns_button.jade
+include ../_mixin_meta_facebook.jade
+
+block vars
+	- var bodyID = 'bgBlack'
+	- var page = 'Cylinder'
+	- var url = 'lab/webgl-cylinder/'
+	- var img = 'cylinder@2x.gif'
+
+block info
+	//- mixin snsButton(page, url)
+
+block body
+	//include _inc_shader.jade
+	script(src="js/cylinder.js")

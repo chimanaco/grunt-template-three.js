@@ -1,0 +1,5 @@
+mixin snsButton(page, url)
+  li <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="#{home + url}" data-text="#{page + title}" data-via="chimanaco">Tweet</a><g:plusone size="medium" href="#{home + url}"></g:plusone><div class="fb-like" data-href="#{home + url}" data-layout="button_count" data-send="false" data-width="120" data-show-faces="false"></div>
+
+mixin snsButtonTop(page, url)
+  li <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="#{home + url}" data-text="#{page}" data-via="chimanaco">Tweet</a><g:plusone size="medium" href="#{home + url}"></g:plusone><div class="fb-like" data-href="#{home + url}" data-layout="button_count" data-send="false" data-width="120" data-show-faces="false"></div>

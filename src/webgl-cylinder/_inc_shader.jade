@@ -1,0 +1,30 @@
+script(type='x-shader/x-vertex')#vertexShader.
+	
+	// Include the Ashima code here!
+	varying vec2 vUv;  
+	varying float noise;
+	uniform float time;
+	
+	void main() {
+		vUv = uv;
+	
+		//- noise = sin(doot(vUv.y,vUv.x) * time);
+		noise = sin((vUv.y + vUv.x) * time);
+		
+		//vec3 newPosition = position + normal * displacement;
+		vec3 newPosition = position + noise * noise * noise * noise;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+	}
+
+script(type='x-shader/x-vertex')#fragmentShader.
+	varying vec2 vUv;
+	varying float noise;
+	
+	void main() {
+		// compose the colour using the UV coordinate
+		// and modulate it with the noise like ambient occlusion
+		//- vec3 color = vec3( vUv * ( 1. - 2. * noise ), 0.0 );
+		vec3 color = vec3( vUv * ( 1. - 1.0 * noise ), 0.0 );
+		//vec3 color = vec3( vUv.x * ( 1. - 2. * noise ), vUv.y * ( 1. - 2. * noise ), 1.0 );
+		gl_FragColor = vec4( color.rgb, 1.0 );
+	}

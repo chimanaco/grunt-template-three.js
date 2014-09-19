@@ -1,16 +1,60 @@
-/*global module:false*/
 module.exports = function(grunt) {
-
     // Project configuration.
     grunt.initConfig({
         // Metadata.
         pkg: grunt.file.readJSON('package.json'),
-        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-          '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-          '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-          '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-          ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+        path: {
+            source: 'src',
+            publish: 'dist'
+        },
         // Task configuration.
+        clean: {
+            build: ['<%= path.publish %>']
+        },
+        compass: {                  // Task
+            dist: {                   // Target
+                options: {              // Target options
+                sassDir: '<%= path.source %>/sass',
+                cssDir: '<%= path.publish %>/css',
+                environment: 'production'
+                }
+            }
+        },
+        connect: {
+            server: {
+                options: { 
+                    port: 9000,
+                    base: '<%= path.publish %>'
+                }
+            }
+        },
+        copy: {
+            source: {
+                    expand: true,
+                    filter: 'isFile',
+                    cwd: '<%= path.source %>',
+                    src: [
+                        '**/*',
+                        '!**/*.jade',
+                        '!**/sass/**/*',
+                        '!**/test/**/*'
+                    ],
+                    dest: '<%= path.publish %>'
+            }
+        },
+        jade: {
+            options: {
+                pretty: false,
+                data: grunt.file.readJSON('package.json')
+            },
+            source: {
+                expand: true,
+                cwd: '<%= path.source %>',
+                src: ['**/!(_)*.jade','!test/**/*.jade'],
+                dest: '<%= path.publish %>',
+                ext: '.html'
+            }
+        },
         jshint: {
             options: {
                 curly: true,
@@ -33,65 +77,7 @@ module.exports = function(grunt) {
                 src: 'Gruntfile.js'
             },
             lib_test: {
-            // src: ['lib/**/*.js', 'test/**/*.js']
                 src: ['./src/**/*.js']
-            }
-        },
-        concat: {
-            options: {
-                // define a string to put between each file in the concatenated output
-                separator: ';',
-                banner: '<%= banner %>',
-                stripBanners: false
-            },
-            dist: {
-                src: ['./src/**/*.js'],
-                dest: './deploy/js/<%= pkg.name %>.js'
-            }
-        },
-        removelogging: {
-            dist: {
-                src: '<%= uglify.dist.dest %>',
-                dest: '<%= uglify.dist.dest %>',
-                report: "min"
-            }
-        },
-        uglify: {
-            options: {
-                // banner: '<%= banner %>'
-            },
-            dist: {
-                src: '<%= concat.dist.dest %>',
-                dest: './deploy/js/<%= pkg.name %>.min.js',
-                report: "min"
-            }
-        },
-        htmlmin: {
-            dist: {
-                options: {
-                    removeComments: false,
-                    collapseWhitespace: false
-                },
-                files: {
-                    './deploy/index.html': './src/index.html' // 'destination': 'source'
-                }
-            }
-        },
-        compass: {
-            dist: {
-                options: {
-                    sassDir: 'scss',
-                    cssDir: 'deploy/css',
-                    environment: 'production'
-                }
-            }
-        },
-        connect: {
-            server: {
-                options: { 
-                    port: 9000,
-                    base: './deploy'
-                }
             }
         },
         watch: {
@@ -100,36 +86,29 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['./src/**/*.js', './scss/*.scss', './src/**/*.html'],
-                tasks: ['default',],
+                tasks: ['default']
             },
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile']
-            }//,
-            // lib_test: {
-            //     files: '<%= jshint.lib_test.src %>',
-            //     tasks: ['jshint:lib_test', 'qunit']
-            // }
+            }
         }
-    }
-);
+    });
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks("grunt-remove-logging");
-
+    
     // pre task.
-    grunt.registerTask('start', ['connect', 'watch']);
+    grunt.registerTask('go', ['connect', 'watch']);
 
     // Default task.    js -> html -> css
-    grunt.registerTask('default', ['jshint', 'concat', 'removelogging', 'uglify', 'htmlmin', 'compass' ]);
-
-    // Default task.   usually only need js
-    // grunt.registerTask('default', ['jshint', 'concat', 'removelogging', 'uglify' ]);
+    // grunt.registerTask('default', ['jade', 'jshint', 'compass', 'uglify', 'clean', 'copy']);
+    grunt.registerTask('default', ['clean','jade', 'copy', 'compass']);
 };

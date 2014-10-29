@@ -206,17 +206,15 @@ function setupGUI() {
 			"Default": {
 				"0": {
 					"fov": 40,
-					"cameraX": 0,
-					"cameraY": 200,
-					"cameraZ": 500,
-					"bottleY": 0,
-					"bottleZ": 0,
-					"bottleRotY": 0.5,
-					"bottleScale": 1,
-					"bottleReaction": false,
-					"movement": "tween",
-					"sinSpeed": 1,
-					"cardVector": 1
+					"cameraX": 300,
+					"cameraY": 300,
+					"cameraZ": 300,
+					"lightX": 2000,
+					"lightY": 5000,
+					"lightZ": -30,
+					"barH": 10,
+					"speed": 70,
+					"sinSpeed": 6.5
 				}
 			},
 		},
@@ -244,7 +242,7 @@ function setupGUI() {
 	DatGuiManager.setOnChange(p, "restart");
 
 	// default
-	gui.open();
+	gui.close();
 }
 
 /* ------------------------------------
